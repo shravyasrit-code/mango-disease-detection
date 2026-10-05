@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mango Disease Detection</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Website Header -->
+        <div class="header">
+
+            <div class="mango-icon">🥭</div>
+
+            <div>
+                <h1>Mango Disease Detection</h1>
+
+                <p class="subtitle">
+                    AI-powered mango disease classification
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+
+            <h2>Upload Mango Image</h2>
+
+            <p>
+                Upload a clear image of a mango leaf or fruit
+                to identify its condition.
+            </p>
+
+            <form action="/" method="POST" enctype="multipart/form-data">
+
+                <label for="image" class="upload-box">
+
+                    <span class="upload-icon">📷</span>
+
+                    <span class="upload-text">
+                        Choose a mango image
+                    </span>
+
+                    <span class="upload-hint">
+                        JPG, JPEG or PNG
+                    </span>
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        required
+                    >
+
+                </label>
+
+                <button type="submit">
+                    🔍 Predict Disease
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Prediction Result -->
+        {% if prediction %}
+
+        <div class="result-section">
+
+            <h2>Prediction Result</h2>
+
+            <div class="result-card">
+
+                <div class="image-container">
+
+                    <img
+                        src="{{ url_for('uploaded_file', filename=filename) }}"
+                        alt="Uploaded Mango Image"
+                    >
+
+                </div>
+
+                <div class="prediction-info">
+
+                    <p class="result-label">
+                        Predicted Class
+                    </p>
+
+                    <h3>
+                        {{ prediction }}
+                    </h3>
+
+                    <p class="result-label">
+                        Confidence
+                    </p>
+
+                    <div class="confidence">
+                        {{ confidence }}%
+                    </div>
+                    <p class="result-label">
+    Description
+</p>
+
+<p>
+    {{ description }}
+</p>
+
+<p class="result-label">
+    Prevention
+</p>
+
+<p>
+    {{ prevention }}
+</p>
+
+                    {% if confidence >= 90 %}
+
+                    <p class="confidence-message high">
+                        🟢 High confidence prediction
+                    </p>
+
+                    {% elif confidence >= 70 %}
+
+                    <p class="confidence-message medium">
+                        🟡 Moderate confidence prediction
+                    </p>
+
+                    {% else %}
+
+                    <p class="confidence-message low">
+                        🔴 Low confidence prediction
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <a href="/" class="another-button">
+                🔄 Predict Another Image
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Supported Classes -->
+        <div class="classes-section">
+
+            <h2>Supported Mango Classes</h2>
+
+            <div class="class-list">
+
+                <span>Anthracnose</span>
+                <span>Powdery Mildew</span>
+                <span>Cutting Weevil</span>
+                <span>Healthy</span>
+                <span>Bacterial Canker</span>
+                <span>Sooty Mould</span>
+                <span>Die Back</span>
+                <span>Gall Midge</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <p>
+                Mango Disease Classification System
+            </p>
+
+            <p>
+                Powered by YOLO11s
+            </p>
+
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
